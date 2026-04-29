@@ -1,5 +1,5 @@
 :root {
-  --background-color: #F5F5F5;
+  --background-color: 	#F0F0F0;
   --foreground-color: #fff;
   --foreground-theme-color: #000;
   --primary-color: rgb(32, 131, 224);
@@ -21,6 +21,7 @@ body {
   height: 100dvh;
   overflow: auto;
   background-color: var(--background-color);
+  position: relative;
 }
 
 ::-webkit-scrollbar {

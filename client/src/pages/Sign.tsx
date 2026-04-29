@@ -4,6 +4,7 @@ import { signApi } from '../api/authInstance'
 import { authFailed, authRequest, authSuccess } from '../store/authSlice'
 import { useAppDispatch } from '../store/hooks'
 import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router'
 
 const Sign = () => {
 
@@ -11,6 +12,7 @@ const Sign = () => {
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     // Function submitting form
     const handleSubmit = useCallback(async (event: SubmitEvent) => {
@@ -30,6 +32,7 @@ const Sign = () => {
         if(result.success){
             dispatch(authSuccess({authToken: result.authToken, user: result.user}))
             toast.success("Account is created")
+            navigate("/")
         }else{
             toast.error(result.error)
             dispatch(authFailed({errorMessage: result.error}))

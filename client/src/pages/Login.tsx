@@ -4,12 +4,14 @@ import { useAppDispatch } from "../store/hooks"
 import { authFailed, authRequest, authSuccess } from "../store/authSlice"
 import { loginApi } from "../api/authInstance"
 import toast from "react-hot-toast"
+import { useNavigate } from "react-router"
 
 const Login = () => {
 
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     // Function for submitting form
     const handleSubmit = async (event: SubmitEvent) => {
@@ -26,9 +28,9 @@ const Login = () => {
         })
 
         if(result.success){
-            console.log(result)
             dispatch(authSuccess({user: result.user, authToken: result.authToken}))
             toast.success("Successfully logined")
+            navigate("/")
         }else{
             toast.error(result.error)
             dispatch(authFailed({errorMessage: result.error}))
