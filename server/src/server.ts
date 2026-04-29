@@ -2,10 +2,11 @@ import Fastify from 'fastify'
 import { envVariables } from './utils/envVariables.js'
 import { authRoutes } from './routes/auth.route.js'
 import { initPlugin } from './plugins/index.js'
+import { logger } from './config/logger.js'
 
 // App instance
 const app = Fastify({
-    logger: true,
+    logger: logger
 })
 const port = envVariables.PORT
 

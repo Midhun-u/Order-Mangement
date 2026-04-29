@@ -7,9 +7,9 @@ export const authBodyValidator = (body: AuthBody) => {
     try {
         
         const object = zod.object({
-            fullname: zod.string().min(3).max(30),
-            email: zod.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/), // testing email by email regex
-            password: zod.string().min(6).max(50)
+            fullname: zod.string().trim().min(3).max(30),
+            email: zod.string().trim().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/), // testing email by email regex
+            password: zod.string().trim().min(6).max(50).trim()
         })
 
         const fields = object.parse(body)
