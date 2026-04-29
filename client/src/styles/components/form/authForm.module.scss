@@ -30,3 +30,18 @@
         gap: 10px;
     }
 }
+
+@media(max-width: 600px){
+    .container{
+        .form{
+            width: 100%;
+        }
+    }
+}
+
+@media(max-height: 550px){
+    .container{
+        align-items: start;
+        margin-top: 30px;
+    }
+}
