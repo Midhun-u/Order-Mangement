@@ -19,9 +19,10 @@
 body {
   width: 100vw;
   height: 100dvh;
-  overflow: auto;
+  overflow-y: auto;
   background-color: var(--background-color);
   position: relative;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {

@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    overflow-x: hidden;
 
     .logo {
         width: 30px;
@@ -41,8 +42,6 @@
         padding-top: 50px;
         right: 0px;
         z-index: 9;
-        translate: 100%;
-        transition: all 200ms linear;
 
         .side-bar-nav{
             display: flex;
@@ -55,8 +54,6 @@
     .show-side-bar{
         @extend .side-bar;
         display: flex;
-        translate: 0;
-        transition: all 200ms linear;
     }
 
 }
@@ -70,10 +67,6 @@
 
         .menu-icon {
             display: block;
-        }
-
-        .side-bar{
-            display: flex;
         }
 
     }

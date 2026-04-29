@@ -1,5 +1,9 @@
 @use '../../styles' as styles;
 
 .button{
+    @extend %button-style;
+}
+
+.primary-button{
     @extend %primary-button-style;
 }

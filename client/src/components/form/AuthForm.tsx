@@ -83,6 +83,7 @@ const AuthForm = ({ formType, fullnameRef, emailRef, passwordRef, onSubmit }: Au
                     name={formType === "sign" ? "Sign In" : "Login In"}
                     type='submit'
                     disabled={loading}
+                    isPrimaryButton
                 />
                 <Link to={formType === "sign" ? "/login" : "/sign"} className={style['nav-link']}>
                     {
