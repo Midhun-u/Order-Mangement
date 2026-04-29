@@ -30,6 +30,20 @@ export const UserModel = {
 
         return user?.dataValues
 
+    },
+
+    getUserByEmailWithPassword: async (email: string) => {
+
+        const user = await User.findOne({
+            where: {
+                email: {
+                    [Op.eq]: email
+                }
+            }
+        })
+
+        return user?.dataValues
+
     }
 
 }

@@ -11,7 +11,7 @@ export const signController = handleError(async (request: FastifyRequest, reply:
 
     const body = request.body as AuthBody || {}
 
-    const validator = authBodyValidator(body)
+    const validator = authBodyValidator(body, "sign")
     if (!validator.success || !validator.fields) {
         reply.status(400)
         return { success: false, error: validator.error, statusCode: 400 }
@@ -25,7 +25,7 @@ export const signController = handleError(async (request: FastifyRequest, reply:
 
     const hashedPassword = await hashPassword(validator.fields.password)
     const newUser = await UserModel.addUser({
-        fullname: validator.fields.fullname,
+        fullname: validator.fields.fullname as string,
         email: validator.fields.email,
         password: hashedPassword
     })

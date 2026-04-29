@@ -29,6 +29,13 @@
         flex-direction: column;
         gap: 10px;
     }
+
+    .nav-link{
+        text-decoration: none;
+        color: var(--primary-accent-color);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
 }
 
 @media(max-width: 600px){

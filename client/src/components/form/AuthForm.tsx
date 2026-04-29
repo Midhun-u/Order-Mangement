@@ -8,6 +8,7 @@ import {
 import { useId, type SubmitEvent, type Ref } from 'react'
 import Button from '../ui/Button'
 import { useAppSelector } from '../../store/hooks'
+import { Link } from 'react-router'
 
 interface AuthFormProps {
     formType: "sign" | "login"
@@ -83,6 +84,19 @@ const AuthForm = ({ formType, fullnameRef, emailRef, passwordRef, onSubmit }: Au
                     type='submit'
                     disabled={loading}
                 />
+                <Link to={formType === "sign" ? "/login" : "/sign"} className={style['nav-link']}>
+                    {
+                        formType === "sign"
+                            ?
+                            <>
+                                Already have an account ?
+                            </>
+                            :
+                            <>
+                                Don't have an account ?
+                            </>
+                    }
+                </Link>
             </form>
         </section>
     )

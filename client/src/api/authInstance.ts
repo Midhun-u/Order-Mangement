@@ -12,3 +12,11 @@ export const signApi = handlError(async (body: {
     return result.data
 
 })
+
+// Api for login
+export const loginApi = handlError(async (body: {email: string, password: string}) => {
+
+    const result = await authInstance.post("/login", body)
+    return result.data
+
+})
