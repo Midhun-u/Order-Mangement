@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes } from 'react'
+import type { InputHTMLAttributes, Ref } from 'react'
 import style from '../../styles/components/form/formInput.module.scss'
 import Input from '../ui/Input'
 import type { LucideReactType } from '../../types/lucideReactType'
@@ -8,9 +8,10 @@ interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
     labelText: string
     type: "text" | "email" | "password"
     Icon: LucideReactType
+    ref?: Ref<HTMLInputElement>
 }
 
-const FormInput = ({ id, type, labelText, Icon,  ...props }: FormInputProps) => {
+const FormInput = ({ id, type, labelText, Icon, ref, ...props }: FormInputProps) => {
 
     return (
         <div className={style.container}>
@@ -23,6 +24,7 @@ const FormInput = ({ id, type, labelText, Icon,  ...props }: FormInputProps) => 
                 />
                 <Input
                     type={type}
+                    ref={ref}
                     {...props}
                 />
             </div>

@@ -10,7 +10,7 @@ export const User = sequelize.define("user", {
         allowNull: false
     },
     fullname: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(30),
         allowNull: false,
     },
     email: {
@@ -19,7 +19,7 @@ export const User = sequelize.define("user", {
         unique: "users_email_key"
     },
     password: {
-        type: DataTypes.TEXT(),
+        type: DataTypes.TEXT,
         allowNull: false,
     }
 })

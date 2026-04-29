@@ -3,46 +3,57 @@ import style from '../../styles/components/form/authForm.module.scss'
 import {
     UserIcon,
     MailIcon as EmailIcon,
-    LockIcon as PasswordIcon
+    Lock as PasswordIcon
 } from 'lucide-react'
-import { useId } from 'react'
+import { useId, type SubmitEvent, type Ref } from 'react'
 import Button from '../ui/Button'
+import { useAppSelector } from '../../store/hooks'
 
 interface AuthFormProps {
     formType: "sign" | "login"
+    fullnameRef?: Ref<HTMLInputElement>
+    emailRef: Ref<HTMLInputElement>
+    passwordRef: Ref<HTMLInputElement>,
+    onSubmit: (event: SubmitEvent) => void
 }
 
-const AuthForm = ({ formType }: AuthFormProps) => {
+const AuthForm = ({ formType, fullnameRef, emailRef, passwordRef, onSubmit }: AuthFormProps) => {
 
     const fullnameId = useId()
     const emailId = useId()
     const passwordId = useId()
+    const { loading } = useAppSelector(state => state.auth)
 
     return (
         <section className={style.container}>
-            <form className={style.form}>
+            <form onSubmit={onSubmit} className={style.form}>
                 <h1 className={style['form-title']}>
                     {
                         formType === "sign"
-                        ?
-                        <>Sign In</>
-                        :
-                        <>Login In</>
+                            ?
+                            <>Sign In</>
+                            :
+                            <>Login In</>
                     }
                 </h1>
                 <div className={style['form-input-container']}>
                     {
                         formType === "sign"
-                        ?
-                        <FormInput
-                            id={fullnameId}
-                            labelText="Fullname"
-                            type='text'
-                            placeholder='Enter your fullname'
-                            Icon={UserIcon}
-                        />
-                        :
-                        null
+                            ?
+                            <FormInput
+                                id={fullnameId}
+                                labelText="Fullname"
+                                type='text'
+                                placeholder='Enter your fullname'
+                                Icon={UserIcon}
+                                ref={fullnameRef}
+                                minLength={3}
+                                maxLength={30}
+                                required
+                                aria-invalid
+                            />
+                            :
+                            null
                     }
                     <FormInput
                         id={emailId}
@@ -50,6 +61,9 @@ const AuthForm = ({ formType }: AuthFormProps) => {
                         type='email'
                         placeholder='Enter your email address'
                         Icon={EmailIcon}
+                        ref={emailRef}
+                        required
+                        aria-invalid
                     />
                     <FormInput
                         id={passwordId}
@@ -57,10 +71,17 @@ const AuthForm = ({ formType }: AuthFormProps) => {
                         type='password'
                         placeholder='Enter your password'
                         Icon={PasswordIcon}
+                        ref={passwordRef}
+                        required
+                        maxLength={50}
+                        minLength={6}
+                        aria-invalid
                     />
                 </div>
                 <Button
-                    name={formType === "sign"? "Sign In": "Login In"}
+                    name={formType === "sign" ? "Sign In" : "Login In"}
+                    type='submit'
+                    disabled={loading}
                 />
             </form>
         </section>

@@ -4,6 +4,7 @@ import { authBodyValidator } from "../../validator/authBodyValidator.js";
 import { handleError } from "../../utils/handleError.js";
 import { UserModel } from "../../models/user.model.js";
 import { hashPassword } from "../../utils/hashPassword.js";
+import { generateToken } from "../../utils/generateToken.js";
 
 // Controller for signing
 export const signController = handleError(async (request: FastifyRequest, reply: FastifyReply) => {
@@ -29,9 +30,13 @@ export const signController = handleError(async (request: FastifyRequest, reply:
         password: hashedPassword
     })
 
+    
     if(newUser){
+
+        const authToken = await generateToken(reply, newUser.id, newUser.email, newUser.fullname)
+
         reply.status(201)
-        return {success: true, message: "User is created", newUser: newUser, statusCode: 201}
+        return {success: true, message: "User is created", user: newUser, authToken: authToken, statusCode: 201}
     }
 
     reply.status(400)
