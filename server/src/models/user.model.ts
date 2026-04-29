@@ -44,6 +44,13 @@ export const UserModel = {
 
         return user?.dataValues
 
+    },
+
+    getUserById: async (id: string) => {
+
+        const user = await User.findByPk(id)
+        return excludePassword(user?.dataValues)
+
     }
 
 }

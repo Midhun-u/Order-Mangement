@@ -1,4 +1,5 @@
 import Header from "../components/layout/Header"
+import style from '../styles/pages/home.module.scss'
 
 const Home = () => {
 
@@ -6,8 +7,9 @@ const Home = () => {
         <>
             <Header
             />
-            <section>
-                
+            <section className={style.container}>
+                <div className={style.page}>
+                </div>
             </section>
         </>
     )
