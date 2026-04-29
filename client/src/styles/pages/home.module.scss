@@ -7,3 +7,11 @@
         width: 80%;
     }
 }
+
+@media(max-width: 600px){
+    .container{
+        .page{
+            width: 100%;
+        }
+    }
+}

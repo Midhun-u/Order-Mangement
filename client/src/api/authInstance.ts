@@ -20,3 +20,11 @@ export const loginApi = handlError(async (body: {email: string, password: string
     return result.data
 
 })
+
+// Api for getting profile
+export const getProfileApi = handlError(async () => {
+
+    const result = await authInstance.get("/get-profile")
+    return result.data
+
+})

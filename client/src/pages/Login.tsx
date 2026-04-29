@@ -28,9 +28,9 @@ const Login = () => {
         })
 
         if(result.success){
+            navigate("/")
             dispatch(authSuccess({user: result.user, authToken: result.authToken}))
             toast.success("Successfully logined")
-            navigate("/")
         }else{
             toast.error(result.error)
             dispatch(authFailed({errorMessage: result.error}))

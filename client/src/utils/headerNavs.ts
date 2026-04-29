@@ -11,5 +11,9 @@ export const headerNavs: HeaderNavs = [
     {
         route: "/cart",
         title: "Cart"
+    },
+    {
+        route: "/orders",
+        title: "Orders"
     }
 ]

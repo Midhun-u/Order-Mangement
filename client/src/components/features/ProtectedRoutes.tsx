@@ -1,4 +1,6 @@
-import type { ReactNode } from "react"
+import { useCallback, useEffect, useState, type ReactNode } from "react"
+import { getProfileApi } from "../../api/authInstance"
+import { useNavigate } from "react-router"
 
 const ProtectedRoutes = ({
     children
@@ -6,14 +8,33 @@ const ProtectedRoutes = ({
     children: ReactNode
 }) => {
 
+    const [authenticated, setAuthenticated] = useState<boolean>(false)
+    const navigate = useNavigate()
+
     // Function for checking authentication
-    const handleCheckAuthentication = () => {
+    const handleCheckAuthentication = useCallback(async () => {
 
-        
+        const result = await getProfileApi()
+        if(result.success){
+            setAuthenticated(true)
+        }else{
+            navigate("/login")
+            setAuthenticated(false)
+        }
 
-    }
+    }, [])
 
-    return children
+    useEffect(() => {
+        handleCheckAuthentication()
+    }, [handleCheckAuthentication])
+
+    return (
+        authenticated
+        ?
+        children
+        :
+        null
+    )
 
 }
 
