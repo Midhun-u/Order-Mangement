@@ -1,4 +1,4 @@
-import { Food } from "../schemas/food.schema.js";
+import { Food } from "../schemas/index.js";
 import type { FoodBody } from "../types/foodBody.js";
 
 // Food model

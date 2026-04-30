@@ -1,5 +1,5 @@
 import { Op } from "sequelize"
-import { User } from "../schemas/user.schema.js"
+import { User } from "../schemas/index.js"
 import type { AuthBody } from "../types/authBody.js"
 import { excludePassword } from "../utils/excludePassword.js"
 

@@ -1,12 +1,11 @@
-import type { DoneFuncWithErrOrRes, FastifyReply, FastifyRequest } from "fastify";
+import type { FastifyReply, FastifyRequest } from "fastify";
 
 // Hook for checking if user authenticated
-export const authenticationHook = async (request: FastifyRequest, reply: FastifyReply, done: DoneFuncWithErrOrRes) => {
+export const authenticationHook = async (request: FastifyRequest, reply: FastifyReply) => {
 
     try {
         
         await request.jwtVerify()
-        done()
 
     } catch (error) {
         reply.status(401)
