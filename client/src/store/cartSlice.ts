@@ -28,7 +28,7 @@ const cartSlice = createSlice({
         cartSuccess: (state, action) => {
             state.loading = false
             state.cartItem = action.payload?.cartItem? action.payload.cartItem: null
-            if(state.cartList.length <= 0 || action.payload?.page === 1){
+            if((state.cartList.length <= 0 || action.payload?.page === 1) && Array.isArray(action.payload.cartList)){
                 state.cartList = [...action.payload.cartList]
             }else if(action.payload?.cartList?.length){
                 state.cartList = [...state.cartList, ...action.payload.cartList]

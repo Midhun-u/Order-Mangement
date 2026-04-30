@@ -11,7 +11,7 @@ export const checkoutCartController = handleError(async (request: FastifyRequest
 
     const {id: userId} = request.user as JWT_PAYLOAD
     const body = request.body as CheckoutBody
-    
+
     const validator = checkoutBodyValidator(body)
     if(!validator.success || !validator.fields || validator.error){
         reply.status(400)
@@ -19,8 +19,12 @@ export const checkoutCartController = handleError(async (request: FastifyRequest
     }
 
     const cart = await CartModel.getCartItemsByUserId(userId)
+    if(!cart.length){
+        reply.status(404)
+        return {success: false, error: "User don't have cart items", statusCode: 404}
+    }
     
-    await Promise.all(cart.map(async (item: any) => {
+    const results = await Promise.all(cart.map(async (item: any) => {
 
         const newOrder = await OrderModel.addOrder({
             userId: userId,
@@ -34,6 +38,19 @@ export const checkoutCartController = handleError(async (request: FastifyRequest
             await CartModel.deleteCartItemById(item.id)
         }
 
+        if(newOrder){
+            return true
+        }else{
+            return false
+        }
+
     }) || [])
+
+   if(results.some(result => !result)){
+        reply.status(400)
+        return {success: false, error: "Couldn't order food", statusCode: 400}
+   } 
+
+   return {success: true, message: "Checkouted", statusCode: 200}
 
 }, "checkoutCartController error")

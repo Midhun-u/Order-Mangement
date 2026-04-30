@@ -2,7 +2,7 @@ import type { InputHTMLAttributes, Ref } from 'react'
 import style from '../../styles/components/ui/input.module.scss'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
-    type: "email" | "text" | "password"
+    type: "email" | "text" | "password" | "number"
     ref?: Ref<HTMLInputElement>
 }
 

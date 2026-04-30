@@ -40,3 +40,14 @@ export const deleteCartItemApi = handlError(async (id) => {
     return result.data
 
 })
+
+// Api for checkouting api
+export const checkoutApi = handlError(async(data: {address: string, phoneNumber: string}) => {
+
+    const result = await cartInstance.post("/checkout-cart", {
+        address: data.address,
+        phoneNumber: data.phoneNumber
+    })
+    return result.data
+
+})

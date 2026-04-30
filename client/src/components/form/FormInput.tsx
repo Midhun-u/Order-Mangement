@@ -6,7 +6,7 @@ import type { LucideReactType } from '../../types/lucideReactType'
 interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
     id: string
     labelText: string
-    type: "text" | "email" | "password"
+    type: "text" | "email" | "password" | "number"
     Icon: LucideReactType
     ref?: Ref<HTMLInputElement>
 }
