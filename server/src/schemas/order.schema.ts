@@ -35,6 +35,11 @@ export const Order = sequelize.define("order", {
         type: DataTypes.STRING(10),
         allowNull: false
     },
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1
+    },
     price: {
         type: DataTypes.INTEGER,
         allowNull: false

@@ -31,7 +31,8 @@ export const checkoutCartController = handleError(async (request: FastifyRequest
             foodId: item.food_id,
             address: validator.fields.address,
             phoneNumber: validator.fields.phoneNumber,
-            price: item.quantity * item.food.price
+            price: item.quantity * item.food.price,
+            quantity: item.quantity
         })
 
         if(newOrder){

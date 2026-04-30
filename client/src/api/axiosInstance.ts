@@ -4,6 +4,7 @@ import { envVariables } from "../utils/envVariables";
 const AUTH_BASE_URL = envVariables.AUTH_URL
 const FOOD_BASE_URL = envVariables.FOOD_URL
 const CART_BASE_URL = envVariables.CART_URL
+const ORDER_BASE_URL = envVariables.ORDER_URL
 
 // Auth Instance
 export const authInstance = axios.create({
@@ -26,6 +27,15 @@ export const foodInstance = axios.create({
 // Cart instance
 export const cartInstance = axios.create({
     baseURL: CART_BASE_URL,
+    withCredentials: true,
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem("authToken") || ""}`
+    }
+})
+
+// Order instance
+export const orderInstance = axios.create({
+    baseURL: ORDER_BASE_URL,
     withCredentials: true,
     headers: {
         Authorization: `Bearer ${localStorage.getItem("authToken") || ""}`

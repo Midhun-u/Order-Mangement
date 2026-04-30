@@ -5,6 +5,7 @@ import { initPlugin } from './plugins/index.js'
 import { logger } from './config/logger.js'
 import { foodsRoute } from './routes/foods.route.js'
 import { cartRoutes } from './routes/cart.route.js'
+import { orderRoutes } from './routes/order.route.js'
 
 // App instance
 const app = Fastify({
@@ -19,6 +20,7 @@ app.register(initPlugin)
 app.register(authRoutes, {prefix: "/api/v1/auth"})
 app.register(foodsRoute, {prefix: "/api/v1/food"})
 app.register(cartRoutes, {prefix: "/api/v1/cart"})
+app.register(orderRoutes, {prefix: "/api/v1/order"})
 
 app.listen({port: port}, (error, address) => {
 

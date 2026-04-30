@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Home from "./pages/Home"
 import Cart from "./pages/Cart"
 import ProtectedRoutes from "./components/features/ProtectedRoutes"
+import Order from "./pages/Order"
 
 const Router = () => {
 
@@ -28,11 +29,22 @@ const Router = () => {
                 }
                 />
                 <Route path="/cart" element={
-                    <Cart
-                    />
+                    < ProtectedRoutes >
+                        <Cart
+                        />
+                    </ProtectedRoutes >
                 }
                 />
-            </Routes>
+                <Route 
+                    path="/orders"
+                    element={
+                        <ProtectedRoutes>
+                            <Order
+                            />
+                        </ProtectedRoutes>
+                    }
+                />
+            </Routes >
         </>
     )
 
