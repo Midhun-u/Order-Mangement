@@ -4,7 +4,7 @@ interface FoodCardProps{
     imageUrl: string
     name: string
     price: number
-    onClick: () => void
+    onClick?: () => void
 }
 
 const FoodCard = ({imageUrl, name, price, onClick}: FoodCardProps) => {

@@ -19,7 +19,7 @@ export const cartRoutes = (fastify: FastifyInstance) => {
     fastify.get("/get-cart-items", {onRequest: authenticationHook}, getCartItemsController)
 
     // Route for updating cart item
-    fastify.patch("/update-cart-item/:id", {onRequest: authenticationHook}, updateCartController)
+    fastify.patch("/update-cart-item/:id/:type", {onRequest: authenticationHook}, updateCartController)
 
     // Route for deleting cart item
     fastify.delete("/delete-cart-item/:id", {onRequest: authenticationHook}, deleteCartItemController)

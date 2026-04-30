@@ -5,25 +5,37 @@ import { CartModel } from "../../models/cart.model.js";
 // Controller updating cart item
 export const updateCartController = handleError(async (request: FastifyRequest, reply: FastifyReply) => {
 
-    const {id} = request.params as {id: string}
+    const { id, type } = request.params as { id: string, type: "increment" | "decrement" }
 
     // Checking if cart item exists
     const cartItem = await CartModel.getCartItemById(id)
-    if(!cartItem){
+    if (!cartItem) {
         reply.status(404)
-        return {success: false, error: "Cart item is not found", statusCode: 404}
+        return { success: false, error: "Cart item is not found", statusCode: 404 }
     }
 
-    const affectedCount = await CartModel.updateCartItemById(id, {
-        quantity: cartItem.quantity + 1
-    })
+    if (type === "increment" && cartItem.quantity < 10) {
 
-    if(affectedCount){
-        reply.status(200)
-        return {success: true, message: "Cart item count is incremented", statusCode: 200}
+        const affectedCount = await CartModel.updateCartItemById(id, {
+            quantity: cartItem.quantity + 1
+        })
+
+        if (affectedCount) {
+            reply.status(200)
+            return { success: true, message: "Cart item count is incremented", statusCode: 200 }
+        }
+    } else if (type === "decrement" && cartItem.quantity >= 2) {
+        const affectedCount = await CartModel.updateCartItemById(id, {
+            quantity: cartItem.quantity - 1
+        })
+
+        if (affectedCount) {
+            reply.status(200)
+            return { success: true, message: "Cart item count is decremented", statusCode: 200 }
+        }
     }
 
     reply.status(400)
-    return {success: false, error: "Couldnt' update cart item", statusCode: 200}
+    return { success: false, error: "Couldnt' update cart item", statusCode: 200 }
 
 }, "updateCartController error")

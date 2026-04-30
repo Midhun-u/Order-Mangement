@@ -1,0 +1,89 @@
+@use '../../styles' as styles;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+        gap: 15px;
+        overflow-x: auto;
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        .load-button {
+            @extend %primary-button-style;
+            width: 200px;
+        }
+    }
+
+    .quantity-container{
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 10px;
+        align-items: center;
+
+        button{
+            padding: 5px 10px;
+            @extend %button-style;
+            width: min-content;
+        }
+
+        span{
+            font-size: 1rem;
+            font-weight: 500;
+        }
+    }
+
+    .item-container{
+        position: relative;
+
+        .delete-container{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            border-top-right-radius: 7px;
+            background-color: var(--foreground-color);
+            cursor: pointer;
+
+            .delete-icon{
+                color: orangered;
+            }
+        }
+    }
+
+
+    .fallback{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+
+        h2{
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@media(max-width: 400px) {
+    .container {
+        .button-container {
+            .load-button {
+                width: 100%;
+            }
+        }
+    }
+}

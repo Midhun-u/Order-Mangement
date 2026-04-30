@@ -98,7 +98,8 @@ export const CartModel = {
                 },
                 {
                     model: Food,
-                    as: "food"
+                    as: "food",
+                    attributes: ['id', 'name', 'image_url', 'price']
                 }
             ],
             nest: true,

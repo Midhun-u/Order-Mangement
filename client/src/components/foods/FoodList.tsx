@@ -8,6 +8,9 @@ import Button from "../ui/Button"
 import {
     X as CloseIcon
 } from 'lucide-react'
+import { cartFailed, cartRequest, cartSuccess } from "../../store/cartSlice"
+import { addFoodToCartApi, getCartItemApi } from "../../api/cartInstance"
+import toast from "react-hot-toast"
 
 const FoodList = () => {
 
@@ -17,6 +20,7 @@ const FoodList = () => {
     })
     const dispatch = useAppDispatch()
     const { foods, loading, food } = useAppSelector(state => state.food)
+    const { loading: cartLoading, cartItem } = useAppSelector(state => state.cart)
     const [hasMore, setHasMore] = useState<boolean>(false)
     const [selectedFoodId, setSelectedFoodId] = useState<string | null>(null)
 
@@ -57,13 +61,47 @@ const FoodList = () => {
 
     }, [selectedFoodId])
 
+    // Function for adding food to cart
+    const handleAddCart = async () => {
+
+        if (!selectedFoodId) return
+
+        dispatch(cartRequest())
+        const result = await addFoodToCartApi({ foodId: selectedFoodId })
+        if (result.success) {
+            toast.success("Food added to cart")
+            dispatch(cartSuccess({ cartItem: result.cartItem }))
+        } else {
+            dispatch(cartFailed({ errorMessage: result.error }))
+        }
+
+    }
+
+    // Function for fetching cart item
+    const handleFetchCartItem = useCallback(async () => {
+
+        if (!selectedFoodId) return
+
+        dispatch(cartRequest())
+        const result = await getCartItemApi(selectedFoodId)
+        if (result.success) {
+            dispatch(cartSuccess({ cartItem: result.cartItem }))
+        } else {
+            dispatch(cartFailed({ errorMessage: result.error }))
+        }
+
+    }, [selectedFoodId])
+
     useEffect(() => {
         handleGetFoods()
     }, [handleGetFoods])
 
     useEffect(() => {
-        handleFetchFoodDetails()
-    }, [handleFetchFoodDetails])
+        if (selectedFoodId) {
+            handleFetchFoodDetails()
+            handleFetchCartItem()
+        }
+    }, [handleFetchFoodDetails, handleFetchCartItem])
 
     return (
         <div className={style.container}>
@@ -100,10 +138,22 @@ const FoodList = () => {
                             <p className={style['food-description']}>{food?.description}</p>
                         </div>
                         <div className={style['details-button-container']}>
-                            <Button
-                                name="Add to Cart"
-                                className={style['cart-button']}
-                            />
+                            {
+                                cartItem
+                                    ?
+                                    <Button
+                                        name="Added to cart"
+                                        className={style['disable-cart-button']}
+                                        disabled
+                                    />
+                                    :
+                                    <Button
+                                        name="Add to Cart"
+                                        className={style['cart-button']}
+                                        onClick={() => handleAddCart()}
+                                        disabled={cartLoading}
+                                    />
+                            }
                         </div>
                     </div>
                 </div>

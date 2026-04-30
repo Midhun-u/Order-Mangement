@@ -8,7 +8,7 @@ import { CartModel } from "../../models/cart.model.js";
 export const getCartItemsController = handleError(async (request: FastifyRequest, reply: FastifyReply) => {
 
     const {id} = request.user as JWT_PAYLOAD
-    const {page = 1, limit = 10} = request.params as {page: number, limit: number}
+    const {page = 1, limit = 10} = request.query as {page: number, limit: number}
     const pageNumber = convertStringToNumber(page)
     const limitNumber = convertStringToNumber(limit)
 
