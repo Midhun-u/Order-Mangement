@@ -6,7 +6,7 @@ export const handlError = <Type extends (...arg: any[]) => any>(fn: Type) => {
             
             return await fn(...args)
     
-        } catch (error) {
+        } catch (error: any) {
             console.error(error)
             return {success: false, error: error?.response?.data?.error || "Something went wrong"}
         }

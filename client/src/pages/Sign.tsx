@@ -19,9 +19,11 @@ const Sign = () => {
 
         event.preventDefault()
 
-        const fullname = fullnameRef.current.value
-        const email = emailRef.current.value
-        const password = passwordRef.current.value
+        const fullname = fullnameRef.current?.value
+        const email = emailRef.current?.value
+        const password = passwordRef.current?.value
+
+        if(!fullname || !email || !password) return
 
         dispatch(authRequest())
         const result = await signApi({

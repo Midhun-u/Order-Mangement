@@ -28,11 +28,13 @@ const Cart = () => {
     const handleCheckout = async (event: SubmitEvent) => {
         event.preventDefault()
 
-        if (!addressRef.current.value || !phoneNumberRef.current.value) return
+        const address = addressRef.current?.value
+        const phoneNumber = phoneNumberRef.current?.value
+        if (!address || !phoneNumber) return
 
         const result = await checkoutApi({
-            address: addressRef.current.value,
-            phoneNumber: phoneNumberRef.current.value
+            address: address,
+            phoneNumber: phoneNumber
         })
 
         if (result.success) {
