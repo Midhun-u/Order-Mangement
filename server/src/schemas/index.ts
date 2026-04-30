@@ -1,6 +1,7 @@
 import { Cart } from "./cart.schema.js";
 import { User } from "./user.schema.js";
 import { Food } from "./food.schema.js";
+import { Order } from "./order.schema.js";
 
 User.hasMany(Cart, {
     foreignKey: "user_id"
@@ -8,11 +9,22 @@ User.hasMany(Cart, {
 Food.hasMany(Cart, {
     foreignKey: "food_id"
 })
-
+User.hasMany(Order, {
+    foreignKey: "user_id"
+})
+Food.hasMany(Order, {
+    foreignKey: "food_id"
+})
 Cart.belongsTo(User, {
     foreignKey: "user_id"
 })
 Cart.belongsTo(Food, {
+    foreignKey: "food_id"
+})
+Order.belongsTo(User, {
+    foreignKey: "user_id"
+})
+Order.belongsTo(Food, {
     foreignKey: "food_id"
 })
 

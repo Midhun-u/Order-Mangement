@@ -5,6 +5,7 @@ import { getCartItemController } from "../controllers/cart/getCartItem.controlle
 import { updateCartController } from "../controllers/cart/updateCart.controller.js";
 import { deleteCartItemController } from "../controllers/cart/deleteCart.controller.js";
 import { getCartItemsController } from "../controllers/cart/getCartItems.controller.js";
+import { checkoutCartController } from "../controllers/cart/checkoutCart.controller.js";
 
 // Cart routes
 export const cartRoutes = (fastify: FastifyInstance) => {
@@ -23,5 +24,8 @@ export const cartRoutes = (fastify: FastifyInstance) => {
 
     // Route for deleting cart item
     fastify.delete("/delete-cart-item/:id", {onRequest: authenticationHook}, deleteCartItemController)
+
+    // Route for checkouting cart
+    fastify.post("/checkout-cart", {onRequest: authenticationHook}, checkoutCartController)
 
 }

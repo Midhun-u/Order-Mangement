@@ -19,7 +19,7 @@ export const authBodyValidator = (body: AuthBody, type: "login" | "sign") => {
         const fields = object.parse(body)
         return {success: true, fields: fields}
 
-    } catch (error) {
+    } catch {
         return {success: false, error: "Invalid fields"}
     }
 

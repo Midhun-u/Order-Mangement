@@ -80,7 +80,7 @@ export const CartModel = {
 
     },
 
-    getCartItemsByUserId: async (userId: string, page: number, limit: number) => {
+    getCartItemsByUserId: async (userId: string, page: number = 1, limit: number = 50) => {
 
         const cartItems = await Cart.findAll({
             where: {
