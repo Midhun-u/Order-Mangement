@@ -4,12 +4,13 @@ interface FoodCardProps{
     imageUrl: string
     name: string
     price: number
+    onClick: () => void
 }
 
-const FoodCard = ({imageUrl, name, price}: FoodCardProps) => {
+const FoodCard = ({imageUrl, name, price, onClick}: FoodCardProps) => {
 
     return (
-        <div className={style.container}>
+        <div onClick={onClick} className={style.container}>
             <img
                 src={imageUrl}
                 alt={`${name} image`}

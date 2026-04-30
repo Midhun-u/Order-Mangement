@@ -3,9 +3,11 @@
     flex-direction: column;
     background-color: var(--foreground-color);
     border-radius: 10px;
-    width: 190px;
+    width: 100%;
     cursor: pointer;
     flex-shrink: 0;
+    aspect-ratio:  4 / 2;
+    height: auto;
 
     .image{
         width: 100%;

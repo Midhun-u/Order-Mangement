@@ -31,6 +31,16 @@ export const FoodModel = {
 
         return foods
 
+    },
+
+    getFoodById: async (id: string) => {
+
+        const food = await Food.findByPk(id, {
+            nest: true,
+        })
+
+        return food?.dataValues
+
     }
 
 }

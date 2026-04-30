@@ -27,9 +27,10 @@ const foodSlice = createSlice({
 
         foodSuccess: (state, action) => {
             state.loading = false
-            if(state.foods.length <= 0 || action.payload.page === 1){
+            state.food = action.payload.food? action.payload.food: null
+            if(state.foods.length <= 0 || action.payload?.page === 1){
                 state.foods = action.payload.foods
-            }else if(action.payload.foods.length){
+            }else if(action.payload?.foods?.length){
                 state.foods = [...state.foods, ...action.payload.foods]
             }
         },

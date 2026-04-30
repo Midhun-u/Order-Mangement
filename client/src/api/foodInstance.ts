@@ -8,3 +8,11 @@ export const getFoodsApi = handlError(async (page: number = 1, limit: number = 1
     return result.data
 
 })
+
+// Api for getting food details
+export const getFoodDetailsApi = handlError(async (id: string) => {
+
+    const result = await foodInstance.get(`/get-food-details/${id}`)
+    return result.data
+
+})
